@@ -1,46 +1,47 @@
 #include "main.h"
 
 /**
- * _printf - prints string and variables passed with format specifiers.
+ * _printf - produces output according to a format
  * @format: the format specifier of the variable to be printed
  * Return: length of the output
  */
 int _printf(const char *format, ...)
 {
-	int i, output_len = 0;
-	va_list argPtr;
-	flag f = {0, 0, 0};
-	int (*spec_func)(va_list, flag *);
+	int index, total_length = 0;
+	va_list args;
+	flag flags = {0, 0, 0};
+	int (*conversion_func)(va_list, flag *);
 
-	va_start(argPtr, format);
+	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
-	for (i = 0; format[i] != '\0'; i++)
+	for (index = 0; format[index] != '\0'; index++)
 	{
-		if (format[i] == '%')
+		if (format[index] == '%')
 		{
-			i++;
-			f.plus = f.space = f.hash = 0;
-			spec_func = get_sf(format, &i, &f);
-			if (spec_func)
-				output_len += spec_func(argPtr, &f);
+			index++;
+			flags.plus = flags.space = flags.hash = 0;
+			conversion_func = get_sf(format, &index, &flags);
+			if (conversion_func)
+				total_length += conversion_func(args, &flags);
 			else
 			{
 				_putchar('%');
-				_putchar(format[i]);
-				output_len += 2;
+				_putchar(format[index]);
+				total_length += 2;
 			}
 		}
 		else
 		{
-			_putchar(format[i]);
-			output_len++;
+			_putchar(format[index]);
+			total_length++;
 		}
 	}
 	_putchar(-1);
-	va_end(argPtr);
-	return (output_len);
+	va_end(args);
+	return (total_length);
 }
+
