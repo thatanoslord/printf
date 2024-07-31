@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * _printf - produces output according to a format
- * @format: format string containing the characters and the specifiers
- *
- * Return: the number of characters printed (excluding the null byte)
+ * _printf - prints string and variables passed with format specifiers.
+ * @format: the format specifier of the variable to be printed
+ * Return: length of the output
  */
 int _printf(const char *format, ...)
 {
@@ -45,4 +44,3 @@ int _printf(const char *format, ...)
 	va_end(argPtr);
 	return (output_len);
 }
-
