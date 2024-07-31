@@ -8,43 +8,43 @@
  */
 int _printf(const char *format, ...)
 {
-	int total_chars = 0;
-	va_list arg_list;
-	char *current_char, *format_start;
+	int total_bytes = 0;
+	va_list args;
+	char *ptr, *start;
 	params_t params = PARAMS_INIT;
 
-	va_start(arg_list, format);
+	va_start(args, format);
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	for (current_char = (char *)format; *current_char; current_char++)
+	for (ptr = (char *)format; *ptr; ptr++)
 	{
-		init_params(&params, arg_list);
-		if (*current_char != '%')
+		init_params(&params, args);
+		if (*ptr != '%')
 		{
-			total_chars += _putchar(*current_char);
+			total_bytes += _putchar(*ptr);
 			continue;
 		}
-		format_start = current_char;
-		current_char++;
-		while (get_flag(current_char, &params)) /* while char at current_char is flag char */
+		start = ptr;
+		ptr++;
+		while (get_flag(ptr, &params)) /* while char at ptr is flag char */
 		{
-			current_char++; /* next char */
+			ptr++; /* next char */
 		}
-		current_char = get_width(current_char, &params, arg_list);
-		current_char = get_precision(current_char, &params, arg_list);
-		if (get_modifier(current_char, &params))
-			current_char++;
-		if (!get_specifier(current_char))
-			total_chars += print_from_to(format_start, current_char,
-				params.l_modifier || params.h_modifier ? current_char - 1 : 0);
+		ptr = get_width(ptr, &params, args);
+		ptr = get_precision(ptr, &params, args);
+		if (get_modifier(ptr, &params))
+			ptr++;
+		if (!get_specifier(ptr))
+			total_bytes += print_from_to(start, ptr,
+				params.l_modifier || params.h_modifier ? ptr - 1 : 0);
 		else
-			total_chars += get_print_func(current_char, arg_list, &params);
+			total_bytes += get_print_func(ptr, args, &params);
 	}
 	_putchar(BUF_FLUSH);
-	va_end(arg_list);
-	return (total_chars);
+	va_end(args);
+	return (total_bytes);
 }
 

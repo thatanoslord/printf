@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef _PRINTF_H
+#define _PRINTF_H
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -23,10 +23,10 @@
  * @unsign: flag if unsigned value
  *
  * @plus_flag: on if plus_flag specified
- * @space_flag: on if hashtag_flag specified
- * @hashtag_flag: on if _flag specified
- * @zero_flag: on if _flag specified
- * @minus_flag: on if _flag specified
+ * @space_flag: on if space_flag specified
+ * @hashtag_flag: on if hashtag_flag specified
+ * @zero_flag: on if zero_flag specified
+ * @minus_flag: on if minus_flag specified
  *
  * @width: field width specified
  * @precision: field precision specified
@@ -114,5 +114,5 @@ char *get_precision(char *p, params_t *params, va_list ap);
 /* _printf.c module */
 int _printf(const char *format, ...);
 
-#endif /* MAIN_H */
+#endif
 
