@@ -10,6 +10,7 @@
 #define OUTPUT_BUF_SIZE 1024
 #define BUF_FLUSH -1
 
+
 #define NULL_STRING "(null)"
 
 #define PARAMS_INIT {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -23,10 +24,10 @@
  * @unsign: flag if unsigned value
  *
  * @plus_flag: on if plus_flag specified
- * @space_flag: on if space_flag specified
- * @hashtag_flag: on if hashtag_flag specified
- * @zero_flag: on if zero_flag specified
- * @minus_flag: on if minus_flag specified
+ * @space_flag: on if hashtag_flag specified
+ * @hashtag_flag: on if _flag specified
+ * @zero_flag: on if _flag specified
+ * @minus_flag: on if _flag specified
  *
  * @width: field width specified
  * @precision: field precision specified
@@ -108,10 +109,10 @@ int print_number_left_shift(char *str, params_t *params);
 /* params.c module */
 void init_params(params_t *params, va_list ap);
 
-/* string_fields.c module */
+/* string_fields.c modoule */
 char *get_precision(char *p, params_t *params, va_list ap);
 
-/* _printf.c module */
+/* _prinf.c module */
 int _printf(const char *format, ...);
 
 #endif
